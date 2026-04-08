@@ -13,24 +13,27 @@
  */
 int partition(int *array, size_t size, int low, int high)
 {
-	int pivot = array[high], count = low, j, tmp;
+	int pivot = array[high], count = low - 1, j, tmp;
 	(void)size;
 
 	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
 		{
+			count++;
 			tmp = array[count];
 			array[count] = array[j];
 			array[j] = tmp;
-			count++;
+			if (count != j)
+				print_array(array, size);
 		}
 	}
-	tmp = array[count];
-	array[count] = array[high];
+	tmp = array[count + 1];
+	array[count + 1] = array[high];
 	array[high] = tmp;
-	print_array(array, size);
-	return (count);
+	if (count + 1 != high)
+		print_array(array, size);
+	return (count + 1);
 }
 /**
  * quick_sort_recursion - Sorts an array using recursion.
